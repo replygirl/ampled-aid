@@ -1,15 +1,16 @@
+import { camelCase } from '@replygirl/change-case-object'
 import tc from '@replygirl/tc'
 import type { NowResponse } from '@vercel/node'
 
-import ping from './_ping'
-import type { TwilioSmsIncomingRequest } from './_types'
+import pong from './_pong'
+import type { TwilioSmsIncoming, TwilioSmsIncomingRequest } from './_types'
 
 export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
   await tc<NowResponse>(
     async () => {
-      const { Body: body } = req.body
+      const msg: TwilioSmsIncoming = camelCase(req.body)
 
-      if (body === 'ping') await ping(req)
+      if (msg.body === 'ping') await pong(msg)
 
       return res.status(200)
     },

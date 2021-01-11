@@ -1,16 +1,8 @@
-import type { TwilioSmsIncomingRequest } from './_types'
+import type { TwilioSmsIncoming } from './_types'
 
 import twilio from 'twilio'
 
-export default async (
-  {
-    body: {
-      From: from,
-      To: to,
-      Body: body
-    }
-  }: TwilioSmsIncomingRequest
-) => {
+export default async ({ from, to }: TwilioSmsIncoming) => {
   const {
     TWILIO_ACCOUNT_SID: twilioAccountSid,
     TWILIO_AUTH_TOKEN: twilioAuthToken
@@ -19,7 +11,7 @@ export default async (
   const t = twilio(twilioAccountSid, twilioAuthToken)
 
   await t.messages.create({
-    body,
+    body: 'pong',
     from: to,
     to: from
   })

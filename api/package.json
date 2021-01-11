@@ -7,6 +7,7 @@
     "@vercel/node": "^1.8.5"
   },
   "dependencies": {
+    "@replygirl/change-case-object": "^1.2.5",
     "@replygirl/tc": "^3.0.0",
     "twilio": "^3.54.2"
   }
