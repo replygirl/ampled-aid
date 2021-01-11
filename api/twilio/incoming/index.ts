@@ -9,7 +9,7 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
     async () => {
       const { body } = req.body
 
-      console.info(body)
+      console.info(req.body)
 
       if (body === 'ping') await ping(req)
 
