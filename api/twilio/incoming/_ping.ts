@@ -5,9 +5,9 @@ import twilio from 'twilio'
 export default async (
   {
     body: {
-      from,
-      to,
-      body
+      From: from,
+      To: to,
+      Body: body
     }
   }: TwilioSmsIncomingRequest
 ) => {
