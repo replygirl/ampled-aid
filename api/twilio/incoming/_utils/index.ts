@@ -1,3 +1,5 @@
-export { default as createConversation } from './create-conversation'
+export { default as createOffer } from './create-offer'
+export { default as findOfferDraft } from './find-offer-draft'
 export { default as pong } from './pong'
+export { default as solicitOfferDetails } from './solicit-offer-details'
 export { default as twilio } from './twilio'

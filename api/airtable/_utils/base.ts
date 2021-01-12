@@ -1,5 +1,7 @@
 import Airtable from 'airtable'
 
+import type { OfferFields } from '../_types'
+
 const {
   AIRTABLE_API_KEY: apiKey = '',
   AIRTABLE_BASE_ID: baseId = ''
@@ -7,4 +9,8 @@ const {
 
 Airtable.configure({ apiKey })
 
-export default Airtable.base(baseId)
+const base = Airtable.base(baseId)
+
+export const offers = base<OfferFields>('Offers')
+
+export default base

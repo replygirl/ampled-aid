@@ -1,8 +1,9 @@
-import type { FieldSet } from 'airtable'
+import type { FieldSet, Record } from 'airtable'
 
 export interface Offer {
   id: string
   code?: number
+  from: string
   category?: string
   type?: string
   name?: string
@@ -11,8 +12,11 @@ export interface Offer {
 
 export interface OfferFields extends FieldSet {
   Code: number
+  From: string
   Category: string
   Type: string
   Name: string
   Description: string
 }
+
+export type OfferRecord = Record<OfferFields>

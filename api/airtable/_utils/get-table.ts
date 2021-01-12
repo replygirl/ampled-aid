@@ -1,26 +1,28 @@
 import { camelCase } from '@replygirl/change-case-object'
 import type { FieldSet } from 'airtable'
+import type { QueryParams } from 'airtable/lib/query_params'
 import type { Dictionary } from 'dictionary-types'
 
 import base from './base'
+import parseRecord from './parse-record'
 
 const getTable = <
   TFields extends FieldSet,
   T extends Dictionary<any>
 >(
   table: string,
-  { view = 'Grid view' } = {}
+  {
+    filterByFormula,
+    view = 'Grid view'
+  }: QueryParams<TFields> = {}
 ) => new Promise<{ items: T[] }>((resolve, reject) => {
   const items: T[] = []
 
   base<TFields>(table)
-    .select({ view })
+    .select({ filterByFormula, view })
     .eachPage(
       (records, next) => {
-        items.push(...records.map(({ _rawJson: { id, fields } }) => ({
-          id,
-          ...camelCase(fields)
-        })))
+        items.push(...records.map(x => parseRecord<TFields, T>(x)))
         next()
       },
       error => {
