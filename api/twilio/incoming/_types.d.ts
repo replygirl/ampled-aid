@@ -24,7 +24,7 @@ export interface TwilioSmsIncomingRequest extends NowRequest {
   }
 }
 
-export interface TwilioSmsIncoming {
+export interface TwilioSmsMessage {
   accountSid: string
   apiVersion: string
   body: string

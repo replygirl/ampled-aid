@@ -4,11 +4,13 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@vercel/node": "^1.8.5"
+    "@vercel/node": "^1.8.5",
+    "dictionary-types": "^1.2.0"
   },
   "dependencies": {
     "@replygirl/change-case-object": "^1.2.5",
     "@replygirl/tc": "^3.0.0",
+    "airtable": "github:replygirl/airtable.js#main",
     "twilio": "^3.54.2"
   }
 }
