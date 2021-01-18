@@ -131,7 +131,7 @@ const editOffer = async (
           : offer
             ? Object.entries(actions).reduce((acc, [k, { name }]) => {
               console.log(name)
-              return !acc && offer[name] ? acc : k
+              return (!acc && offer[name]) ? acc : k
             }, '')
             : null
 
