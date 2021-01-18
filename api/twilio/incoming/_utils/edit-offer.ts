@@ -130,7 +130,7 @@ const editOffer = async (
           selectRoutes = {}
         } = Object.values(actions).find(x => x.name === field) as Action
         console.log('will assign')
-        console.log(type)
+        console.log(type, ['string', 'text'].includes(type), body)
         Object.assign(offer, await updateOffer(id, {
           [field]: ['string', 'text'].includes(type)
             ? body
