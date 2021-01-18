@@ -129,10 +129,7 @@ const editOffer = async (
         (!field && (Object.keys(actions).includes(msg.body)))
           ? msg.body
           : offer
-            ? Object.entries(actions).reduce((acc, [k, { name }]) => {
-              console.log(name)
-              return (!acc && !offer[name]) ? k : acc
-            }, '')
+            ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
             : null
 
       editing = nextActionKey
