@@ -3,7 +3,7 @@ import tc from '@replygirl/tc'
 import type { NowResponse } from '@vercel/node'
 
 import type { Person } from '../../airtable/_types'
-import { updatePerson } from '../../airtable/_utils'
+import { findOfferByCode, updatePerson } from '../../airtable/_utils'
 import type { TwilioSmsMessage, TwilioSmsIncomingRequest } from './_types'
 import {
   createOffer,
@@ -41,6 +41,7 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
   await tc<NowResponse>(
     async () => {
       const msg: TwilioSmsMessage = camelCase(req.body)
+      const { body } = msg
       const person: Person = (await findPerson(msg)) ?? await createPerson(msg)
       const {
         id: personId,
@@ -52,11 +53,18 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
         `person ${personId} is editing ${editingField} of ${editingId}`
       )
 
-      if (/^RESPOND \d+ .+$/.test(msg.body)) await createResponse(msg)
-      if (/^EDIT(?: \d+)?$/.test(msg.body))
-        setEditStatus(...await showEditMenu(msg, person))
+      if (/^RESPOND \d+ .+$/.test(body)) await createResponse(msg)
+      else if (/^EDIT(?: \d+)?$/.test(body)) {
+        await setEditStatus(...await showEditMenu(msg, person))
+        return res.status(200)
+      }
+      else if (/^\d+$/.test(body)) {
+        const { id: selectedId } = await findOfferByCode(body)
+        await setOffer(msg, personId, selectedId)
+        return res.status(200)
+      }
 
-      switch (msg.body) {
+      switch (body) {
         case 'OFFER':
           const { id: offerId } = await createOffer(personId as string)
           await setOffer(msg, personId, offerId)
