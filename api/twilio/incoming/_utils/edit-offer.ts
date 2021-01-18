@@ -148,7 +148,7 @@ const editOffer = async (
 
       const nextActionKey: string | null =
         (!field && (Object.keys(actions).includes(body)))
-          ? actions[body].name
+          ? body
           : offer
             ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
             : null
