@@ -26,8 +26,8 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
 
       switch (msg.body) {
         case 'OFFER':
-          const { id: offerId } = await createOffer(id)
-          await editOffer(msg, offerId)
+          const { id: offerId } = await createOffer(id as string)
+          await editOffer(msg, offerId as string)
           break
         default:
           if (editingId) {
