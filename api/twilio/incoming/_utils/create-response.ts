@@ -1,12 +1,12 @@
 import type { TwilioSmsMessage } from '../_types'
-import { findPerson, findOffer } from '../../../airtable/_utils'
+import { findPerson, findOfferByCode } from '../../../airtable/_utils'
 import createMessage from './create-message'
 import createMessageReply from './create-message-reply'
 
 const createResponse = async (msg: TwilioSmsMessage) => {
-  const [_, respondToId, response] = /^RESPOND (\d+) (.+)$/.exec(msg.body) ?? []
+  const [_, code, response] = /^RESPOND (\d+) (.+)$/.exec(msg.body) ?? []
 
-  const { from: [toId], title } = await findOffer(respondToId)
+  const { from: [toId], title } = await findOfferByCode(code)
   const { phone: toPhone } = await findPerson(toId)
 
   return Promise.all([
