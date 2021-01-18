@@ -17,8 +17,8 @@ const editOffer = async (
   switch (body) {
     case 'LATER':
       await createMessageReply(msg,
-        'Come back any time to edit and publish your offer'
-        )
+        `Text EDIT ${offer.code} to make changes later. Don't forget!!`
+      )
       editing = null
       break
     case 'PUBLISH':
@@ -29,8 +29,8 @@ const editOffer = async (
       editing = null
       break
     case 'DONE':
-      editing = null
       await createMessageReply(msg, '💤')
+      editing = null
       break
     case 'CLOSE':
       Object.assign(offer, await updateOffer(id, { status: 'closed' }))
