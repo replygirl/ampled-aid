@@ -7,7 +7,7 @@ import findOffer from './find-offer'
 import createMessageReply from './create-message-reply'
 
 interface ActionBase {
-  name: keyof Offer
+  name: keyof Offer & string
   type: 'string' | 'text' | 'select' | 'selectChild'
   question?: string
   selectOptions?: Dictionary<string>
@@ -132,7 +132,7 @@ const editOffer = async (
             ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
             : null
 
-      editing = nextActionKey
+      editing = nextActionKey ? actions[nextActionKey].name : null
 
       if (nextActionKey) {
         const a = actions[nextActionKey]
