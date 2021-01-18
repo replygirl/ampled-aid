@@ -10,7 +10,8 @@ import {
   createPerson,
   createResponse,
   editOffer,
-  findPerson
+  findPerson,
+  showEditMenu
 } from './_utils'
 
 const setEditStatus = (
@@ -40,17 +41,20 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
   await tc<NowResponse>(
     async () => {
       const msg: TwilioSmsMessage = camelCase(req.body)
+      const person: Person = (await findPerson(msg)) ?? await createPerson(msg)
       const {
         id: personId,
         editing: [editingId] = [],
         editingField
-      }: Person = (await findPerson(msg)) ?? await createPerson(msg)
+      } = person
 
       console.info(
         `person ${personId} is editing ${editingField} of ${editingId}`
       )
 
       if (/^RESPOND \d+ .+$/.test(msg.body)) await createResponse(msg)
+      if (/^EDIT(?: \d+)?$/.test(msg.body))
+        setEditStatus(...await showEditMenu(msg, person))
 
       switch (msg.body) {
         case 'OFFER':

@@ -95,6 +95,7 @@ const editOffer = async (
   field?: string | null
 ) => {
   const { body } = msg
+
   const offer: Offer = await findOffer(id)
   let editing: string | null = field ?? null
 
@@ -147,7 +148,7 @@ const editOffer = async (
 
       const nextActionKey: string | null =
         (!field && (Object.keys(actions).includes(body)))
-          ? body
+          ? actions[body].name
           : offer
             ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
             : null
