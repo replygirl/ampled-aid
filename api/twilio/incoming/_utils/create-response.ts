@@ -9,6 +9,8 @@ const createResponse = async (msg: TwilioSmsMessage) => {
   const { from: [toId], title } = await findOfferByCode(code)
   const { phone: toPhone } = await findPerson(toId)
 
+  console.log(toId, title, toPhone)
+
   await createMessage(msg, toPhone,
     `New response to ${title} from ${msg.from}: ${response}`
   )
