@@ -12,35 +12,39 @@ import {
   findPerson
 } from './_utils'
 
+const setOffer = async (
+  msg: TwilioSmsMessage,
+  personId?: string,
+  offerId?: string,
+  field?: string | null
+) => {
+  const { editing, offer } = await editOffer(msg, offerId as string, field)
+  console.log(editing, offer)
+  await updatePerson(personId as string, {
+    editing: editing ? [offerId as string] : [],
+    editingField: editing
+  })
+}
+
 export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
   await tc<NowResponse>(
     async () => {
       const msg: TwilioSmsMessage = camelCase(req.body)
       const {
-        id,
+        id: personId,
         editing: [editingId] = [],
         editingField
       }: Person = (await findPerson(msg)) ?? await createPerson(msg)
 
-      console.log('person id', id)
+      console.log('person id', personId)
 
       switch (msg.body) {
         case 'OFFER':
-          const { id: offerId } = await createOffer(id as string)
-          await editOffer(msg, offerId as string)
+          const { id: offerId } = await createOffer(personId as string)
+          await setOffer(msg, personId, offerId)
           break
         default:
-          if (editingId) {
-            const {
-              editing,
-              offer
-            } = await editOffer(msg, editingId, editingField)
-            console.log(editing, offer)
-            await updatePerson(id as string, {
-              editing: editing && offer?.id ? [offer.id] : [],
-              editingField: editing
-            })
-          }
+          if (editingId) await setOffer(msg, personId, editingId, editingField)
       }
 
       return res.status(200)
