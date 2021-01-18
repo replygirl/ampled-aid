@@ -35,6 +35,7 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
               editing,
               offer
             } = await editOffer(msg, editingId, editingField)
+            console.log(editing, offer)
             await updatePerson(id as string, {
               editing: editing && offer?.id ? [offer.id] : [],
               editingField: editing
