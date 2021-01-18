@@ -17,7 +17,7 @@ const setEditStatus = (
   offerId?: string,
   editing?: string | null,
 ) => updatePerson(personId as string, {
-  editing: editing && offerId ? [offerId as string] : null,
+  editing: editing ? [offerId as string] : [],
   editingField: editing
 })
 
