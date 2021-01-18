@@ -15,10 +15,10 @@ import {
 
 const setEditStatus = (
   personId?: string,
-  offerId?: string,
+  offerId?: string | null,
   editing?: string | null,
 ) => updatePerson(personId as string, {
-  editing: editing ? [offerId as string] : [],
+  editing: !!editing && !!offerId ? [offerId as string] : [],
   editingField: editing
 })
 
@@ -59,7 +59,7 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
           break
         default:
           if (editingId) await setOffer(msg, personId, editingId, editingField)
-          else await setEditStatus(personId, offerId, null)
+          else await setEditStatus(personId, null, null)
       }
 
       return res.status(200)
