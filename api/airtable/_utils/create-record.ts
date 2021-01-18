@@ -11,7 +11,7 @@ const createRecord = async <
 >(
   table: string,
   data: T
-) =>
+): Promise<T> =>
   parseRecord(
     await base<TFields>(table).create(
       sentenceCase(data) as Partial<TFields>

@@ -5,24 +5,18 @@ import type { Dictionary } from 'dictionary-types'
 import base from './base'
 import { parseRecord } from './parse-record'
 
-const updateRecord = <
+const updateRecord = async <
   TFields extends FieldSet,
   T extends Dictionary<any>
 >(
   table: string,
   id: string,
   data: Partial<T>
-) => new Promise<T>((resolve, reject) => {
-  const fields: Partial<TFields> = sentenceCase(data)
-
-  base<TFields>(table).update(
+): Promise<T> => parseRecord(
+  await base<TFields>(table).update(
     id,
-    fields,
-    (error: unknown, record?: Record<TFields>) => {
-      if (error) reject(error)
-      resolve(parseRecord<TFields, T>(record as Record<TFields>))
-    }
+    sentenceCase(data) as Partial<TFields>
   )
-})
+)
 
 export default updateRecord
