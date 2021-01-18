@@ -1,8 +1,5 @@
 {
   "name": "api",
-  "engines": {
-    "node": "12.x"
-  },
   "devDependencies": {
     "@vercel/node": "^1.8.5",
     "dictionary-types": "^1.2.0"
