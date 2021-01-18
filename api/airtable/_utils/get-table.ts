@@ -1,5 +1,5 @@
 import type { FieldSet } from '@replygirl/airtable'
-import type { QueryParams } from 'airtable/lib/query_params'
+import type { QueryParams } from '@replygirl/airtable/lib/query_params'
 import type { Dictionary } from 'dictionary-types'
 
 import base from './base'

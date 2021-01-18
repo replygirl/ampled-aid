@@ -1,6 +1,6 @@
 import { camelCase } from '@replygirl/change-case-object'
 import type { FieldSet, Record } from '@replygirl/airtable'
-import type { QueryParams } from 'airtable/lib/query_params'
+import type { QueryParams } from '@replygirl/airtable/lib/query_params'
 import type { Dictionary } from 'dictionary-types'
 
 export const parseRecord = <
