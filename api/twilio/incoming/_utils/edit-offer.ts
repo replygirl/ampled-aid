@@ -115,6 +115,7 @@ const editOffer = async (
       break
     case 'DONE':
       editing = null
+      await createMessageReply(msg, '💤')
       break
     case 'CLOSE':
       Object.assign(offer, await updateOffer(id, { status: 'closed' }))
