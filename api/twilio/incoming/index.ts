@@ -28,9 +28,7 @@ const setOffer = async (
   field?: string | null
 ) => {
   const { editing } = await editOffer(msg, offerId as string, field)
-  try {
-    return setEditStatus(personId, offerId, editing)
-  } catch (e) { console.error(e) }
+  return setEditStatus(personId, offerId, editing)
 }
 
 export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
