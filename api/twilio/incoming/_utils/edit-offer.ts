@@ -166,10 +166,14 @@ const editOffer = async (
       )
   }
 
+  console.log('updating person')
+
   await updatePerson(id, {
     editing: editing && offer?.id ? [offer.id] : [],
     editingField: editing
   })
+
+  console.log('ending')
 
   return { editing, offer }
 }
