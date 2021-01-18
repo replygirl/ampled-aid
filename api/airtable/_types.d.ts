@@ -1,4 +1,4 @@
-import type { FieldSet, Record } from 'airtable'
+import type { FieldSet, Record } from '@replygirl/airtable'
 
 export interface Resource extends Dictionary<any> {
   id: string

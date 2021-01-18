@@ -1,13 +1,14 @@
 {
   "name": "api",
   "devDependencies": {
+    "@types/airtable": "^0.8.1",
     "@vercel/node": "^1.8.5",
     "dictionary-types": "^1.2.0"
   },
   "dependencies": {
+    "@replygirl/airtable": "^0.10.2",
     "@replygirl/change-case-object": "^1.2.5",
     "@replygirl/tc": "^3.0.0",
-    "airtable": "^0.10.1",
     "twilio": "^3.54.2"
   }
 }

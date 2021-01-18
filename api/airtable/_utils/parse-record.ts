@@ -1,5 +1,5 @@
 import { camelCase } from '@replygirl/change-case-object'
-import type { FieldSet, Record } from 'airtable'
+import type { FieldSet, Record } from '@replygirl/airtable'
 import type { QueryParams } from 'airtable/lib/query_params'
 import type { Dictionary } from 'dictionary-types'
 

@@ -1,4 +1,4 @@
-import Airtable from 'airtable'
+import Airtable from '@replygirl/airtable'
 
 import type { OfferFields } from '../_types'
 

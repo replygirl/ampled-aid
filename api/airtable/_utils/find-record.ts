@@ -1,4 +1,4 @@
-import type { FieldSet, Record } from 'airtable'
+import type { FieldSet, Record } from '@replygirl/airtable'
 import type { Dictionary } from 'dictionary-types'
 
 import base from './base'
