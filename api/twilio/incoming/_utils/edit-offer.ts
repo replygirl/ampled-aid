@@ -52,8 +52,8 @@ const actions: Dictionary<Action> = {
       s: 'services'
     }
   },
-  t: {
-    name: 'type',
+  s: {
+    name: 'Subcategory',
     type: 'selectChild',
     selectParent: 'category',
     selectRoutes: {
@@ -74,14 +74,14 @@ const actions: Dictionary<Action> = {
       }
     }
   },
-  n: {
-    name: 'name',
-    question: 'Give your offer a short name (a longer description is next):',
+  t: {
+    name: 'title',
+    question: 'Give your offer a short title:',
     type: 'string'
   },
   d: {
     name: 'description',
-    question: 'Describe your offer in detail:',
+    question: 'Describe in detail:',
     type: 'text'
   }
 }

@@ -10,8 +10,8 @@ export interface Offer extends Resource {
   from: string[]
   editor?: string[]
   category?: string
-  type?: string
-  name?: string
+  subcategory?: string
+  title?: string
   description?: string
   status: 'draft' | 'open' | 'closed'
 }
@@ -21,8 +21,8 @@ export interface OfferFields extends FieldSet {
   From: string[]
   Editor: string[]
   Category: string
-  Type: string
-  Name: string
+  Subcategory: string
+  Title: string
   Description: string
 }
 
