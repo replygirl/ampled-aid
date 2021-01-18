@@ -45,3 +45,39 @@ export interface TwilioSmsMessage {
   toState: string
   toZip: string
 }
+
+export interface ActionBase {
+  name: keyof Offer & string
+  type: 'string' | 'text' | 'select' | 'selectChild'
+  question?: string
+  selectOptions?: Dictionary<string>
+  selectParent?: keyof Offer
+  selectRoutes?: Dictionary<{
+    question: string
+    selectOptions: Dictionary<string>
+  }>
+}
+
+export interface ActionString extends ActionBase {
+  type: 'string' | 'text'
+  question: string
+}
+
+export interface ActionSelectRoot extends ActionBase {
+  type: 'select'
+  question: string
+  selectOptions: Dictionary<string>
+}
+
+export interface ActionSelectChild extends ActionBase {
+  type: 'selectChild'
+  selectParent?: keyof Offer
+  selectRoutes?: Dictionary<{
+    question: string
+    selectOptions: Dictionary<string>
+  }>
+}
+
+export type ActionSelect = ActionSelectRoot | ActionSelectChild
+
+export type Action = ActionString | ActionSelect
