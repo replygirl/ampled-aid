@@ -131,15 +131,17 @@ const editOffer = async (
         } = Object.values(actions).find(x => x.name === field) as Action
         console.log('will assign')
         console.log(type, ['string', 'text'].includes(type), body)
-        Object.assign(offer, await updateOffer(id, {
-          [field]: ['string', 'text'].includes(type)
-            ? body
-            : type === 'select'
-              ? selectOptions[body]
-              : type === 'selectChild'
-                ? selectRoutes[offer[selectParent]].selectOptions[body]
-                : body
-        }))
+        try {
+          Object.assign(offer, await updateOffer(id, {
+            [field]: ['string', 'text'].includes(type)
+              ? body
+              : type === 'select'
+                ? selectOptions[body]
+                : type === 'selectChild'
+                  ? selectRoutes[offer[selectParent]].selectOptions[body]
+                  : body
+          }))
+        } catch (e) { console.error(e) }
       }
 
       console.log('assigned')
