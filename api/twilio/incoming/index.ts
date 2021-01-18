@@ -22,6 +22,8 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
         editingField
       }: Person = (await findPerson(msg)) ?? await createPerson(msg)
 
+      console.log('person id', undefined)
+
       switch (msg.body) {
         case 'OFFER':
           const { id: offerId } = await createOffer(id)
