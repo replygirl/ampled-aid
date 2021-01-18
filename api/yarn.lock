@@ -13,10 +13,10 @@
     lodash "^4.17.19"
     node-fetch "^2.6.1"
 
-"@replygirl/change-case-object@^1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@replygirl/change-case-object/-/change-case-object-1.2.5.tgz#f405f6b8fc6ef8cab5a602e4cc3d8068660f1e5a"
-  integrity sha512-myf4qxNHyaH+vhnMIeK5G8DKG4bv/KWzthlKgAaTHUec4boCTRohg5W6XILd3svnWCdeambKg2h7JCLEpmHb1A==
+"@replygirl/change-case-object@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@replygirl/change-case-object/-/change-case-object-1.2.6.tgz#7124fb5bc4e2be89d82bf45bc76cf47cc95c3500"
+  integrity sha512-pOKrdNh39CIDnI/NIv0+B6g/AOdG/ZpDse8xqMTUYNXYfZmsk4dRWmFt1etvd/rBJpe1O2ITo3acRNsOYv5aJQ==
   dependencies:
     change-case "^4.1.1"
 
