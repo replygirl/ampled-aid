@@ -6,6 +6,7 @@ import type { Person } from '../../airtable/_types'
 import { findOfferByCode, updatePerson } from '../../airtable/_utils'
 import type { TwilioSmsMessage, TwilioSmsIncomingRequest } from './_types'
 import {
+  createMessageReply,
   createOffer,
   createPerson,
   createResponse,
@@ -42,9 +43,10 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
     async () => {
       const msg: TwilioSmsMessage = camelCase(req.body)
       const { body } = msg
-      const person: Person = (await findPerson(msg)) ?? await createPerson(msg)
+      const person: Person = await findPerson(msg)
       const {
         id: personId,
+        name: personName,
         editing: [editingId] = [],
         editingField
       } = person
@@ -52,6 +54,22 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
       console.info(
         `person ${personId} is editing ${editingField} of ${editingId}`
       )
+
+      if (!personId) {
+        await createPerson(msg)
+        await createMessageReply(msg,
+          `Hold on, we just met. What's your name? (It can be fake I won't be offended`
+        )
+        return res.status(200)
+      }
+
+      if (!personName) {
+        await updatePerson(personId, { name: body })
+        await createMessageReply(msg,
+          `Nice to meet you ${body}. Can you repeat what you said before?`
+        )
+        return res.status(200)
+      }
 
       if (/^RESPOND \d+ .+$/.test(body)) await createResponse(msg)
       else if (/^EDIT(?: \d+)?$/.test(body)) {

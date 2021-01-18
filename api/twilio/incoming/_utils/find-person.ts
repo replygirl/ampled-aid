@@ -7,5 +7,5 @@ export default async ({ from }: TwilioSmsMessage) => {
     filterByFormula: `Phone = '${from}'`
   })
 
-  return person
+  return person ?? {}
 }
