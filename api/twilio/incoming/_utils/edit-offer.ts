@@ -97,7 +97,7 @@ const editOffer = async (
   const { body } = msg
 
   const offer: Offer = await findOffer(id)
-  let editing: string | null = field ?? null
+  let editing: string | true | null = field ?? null
 
   switch (body) {
     case 'LATER':
@@ -146,16 +146,18 @@ const editOffer = async (
 
       console.log('assigned')
 
-      const nextActionKey: string | null =
+      const nextActionKey: string | true | null =
         (!field && (Object.keys(actions).includes(body)))
           ? body
           : offer
-            ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
+            ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? true
             : null
 
-      editing = nextActionKey ? actions[nextActionKey].name : null
+      editing = typeof nextActionKey === 'string'
+        ? actions[nextActionKey].name
+        : nextActionKey
 
-      if (nextActionKey) {
+      if (typeof nextActionKey === 'string') {
         const a = actions[nextActionKey]
         await createMessageReply(msg,
           ['string', 'text'].includes(a.type)

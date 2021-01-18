@@ -18,10 +18,10 @@ import {
 const setEditStatus = (
   personId?: string,
   offerId?: string | null,
-  editing?: string | null,
+  editing?: string | true | null,
 ) => updatePerson(personId as string, {
   editing: !!editing && !!offerId ? [offerId as string] : [],
-  editingField: editing
+  editingField: typeof editing === 'string' ? editing : null
 })
 
 const setOffer = async (
