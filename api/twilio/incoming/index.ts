@@ -2,43 +2,42 @@ import { camelCase } from '@replygirl/change-case-object'
 import tc from '@replygirl/tc'
 import type { NowResponse } from '@vercel/node'
 
+import type { Person } from '../../airtable/_types'
+import { updatePerson } from '../../airtable/_utils'
 import type { TwilioSmsMessage, TwilioSmsIncomingRequest } from './_types'
 import {
   createOffer,
-  findOfferDraft,
-  pong,
-  solicitOfferDetails
+  createPerson,
+  editOffer,
+  findPerson
 } from './_utils'
 
 export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
   await tc<NowResponse>(
     async () => {
       const msg: TwilioSmsMessage = camelCase(req.body)
-      const { body } = msg
-      const offerCode = body.match(/\d+/)?.[0]
+      const {
+        id,
+        editing: [editingId] = [],
+        editingField
+      }: Person = (await findPerson(msg)) ?? await createPerson(msg)
 
-      const commands: [string, (x: string) => boolean][] = [
-        ['closeOffer',     x => /^CLOSE \d+$/.test(x)],
-        ['createOffer',    x => x === 'OFFER'],
-        ['pong',           x => x === 'ping'],
-        ['respondToOffer', x => /^RESPOND TO \d+$/.test(x)]
-      ]
-
-      const command = commands.find(([_, v]) => v(body))?.[0]
-
-      // One-off commands
-      if (command === 'pong')           await pong(msg)
-      if (command === 'respondToOffer') await respondToOffer(offerCode)
-      if (command === 'closeOffer')     await closeOffer(offerCode)
-
-      // Offer creation
-      let draft = await findOfferDraft(msg)
-      if (command === 'createOffer') {
-        if (draft) await rejectOffer(msg)
-        else draft = await createOffer(msg)
+      switch (msg.body) {
+        case 'OFFER':
+          const { id: offerId } = await createOffer(id)
+          await editOffer(msg, offerId)
+          break
+        default:
+          if (editingId) await editOffer(msg, editingId, editingField)
       }
-      if (!command && draft) await updateOfferDetails(draft, msg)
-      if (draft) await solicitOfferDetails(draft)
+
+      if (editingId) {
+        const { editing, offer } = await editOffer(msg, editingId, editingField)
+        await updatePerson(id, {
+          editing: editing ? [offer.id] : [],
+          editingField: editing
+        })
+      }
 
       return res.status(200)
     },

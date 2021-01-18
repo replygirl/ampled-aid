@@ -1,5 +1,7 @@
 export { default as createOffer } from './create-offer'
-export { default as findOfferDraft } from './find-offer-draft'
+export { default as createPerson } from './create-person'
+export { default as editOffer } from './edit-offer'
+export { default as findPerson } from './find-person'
 export { default as pong } from './pong'
 export { default as solicitOfferDetails } from './solicit-offer-details'
 export { default as twilio } from './twilio'

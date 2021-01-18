@@ -1,9 +1,4 @@
 import type { TwilioSmsMessage } from '../_types'
-import twilio from './twilio'
+import createMessageReply from './create-message-reply'
 
-export default ({ from, to }: TwilioSmsMessage) =>
-  twilio.messages.create({
-    body: 'pong',
-    from: to,
-    to: from
-  })
+export default (msg: TwilioSmsMessage) => createMessageReply(msg, 'pong')
