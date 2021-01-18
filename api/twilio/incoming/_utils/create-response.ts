@@ -9,12 +9,13 @@ const createResponse = async (msg: TwilioSmsMessage) => {
   const { from: [toId], title } = await findOfferByCode(code)
   const { phone: toPhone } = await findPerson(toId)
 
-  return Promise.all([
-    createMessage(msg, toPhone,
-      `New response to ${title} from ${msg.from}: ${response}`
-    ),
-    createMessageReply(msg, 'Your response has been sent. Keep an eye out 👁'),
-  ])
+  await createMessage(msg, toPhone,
+    `New response to ${title} from ${msg.from}: ${response}`
+  )
+
+  await createMessageReply(msg,
+    'Your response has been sent. Keep an eye out 👁'
+  )
 }
 
 export default createResponse
