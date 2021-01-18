@@ -187,8 +187,6 @@ const editOffer = async (
       )
   }
 
-  console.log('i am confused', editing)
-
   return { editing, offer }
 }
 
