@@ -108,7 +108,9 @@ const editOffer = async (
       break
     case 'PUBLISH':
       Object.assign(offer, await updateOffer(id, { status: 'open' }))
-      await createMessageReply(msg, 'Your offer is now live!')
+      await createMessageReply(msg,
+        `🎉 Your offer is now live! You'll get texts when people are interested. Send EDIT to update, CLOSE to expire, or OFFER to post more`
+      )
       editing = null
       break
     case 'DONE':
