@@ -42,6 +42,7 @@ export interface PersonFields extends FieldSet {
   Name: string
   Offers: string[]
   Editing: string[]
+  EditingField: string
 }
 
 export type PersonRecord = Record<PersonFields>
