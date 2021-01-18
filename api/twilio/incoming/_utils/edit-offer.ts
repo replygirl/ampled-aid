@@ -95,10 +95,11 @@ const editOffer = async (
   id: string,
   field?: string | null
 ) => {
+  const { body } = msg
   const offer: Offer = await findOffer(id)
   let editing: string | null = field ?? null
 
-  switch (msg.body) {
+  switch (body) {
     case 'LATER':
       await createMessageReply(msg,
         'Come back any time to edit and publish your offer'
@@ -121,13 +122,27 @@ const editOffer = async (
       editing = null
       break
     default:
-      if (field) Object.assign(offer, await updateOffer(id, {
-        [field]: msg.body
-      }))
+      if (field) {
+        const {
+          type,
+          selectOptions = {},
+          selectParent = '',
+          selectRoutes = {}
+        } = Object.values(actions).find(x => x.name === field) as Action
+        Object.assign(offer, await updateOffer(id, {
+          [field]: type === 'string'
+            ? body
+            : type === 'select'
+              ? selectOptions[body]
+              : type === 'selectChild'
+                ? selectRoutes[offer[selectParent]].selectOptions[body]
+                : body
+        }))
+      }
 
       const nextActionKey: string | null =
-        (!field && (Object.keys(actions).includes(msg.body)))
-          ? msg.body
+        (!field && (Object.keys(actions).includes(body)))
+          ? body
           : offer
             ? Object.keys(actions).find(k => !offer[actions[k].name]) ?? null
             : null
