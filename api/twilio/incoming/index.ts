@@ -29,7 +29,9 @@ const setOffer = async (
 ) => {
   const { editing } = await editOffer(msg, offerId as string, field)
   console.log('hi')
-  await setEditStatus(personId, offerId, editing)
+  try {
+    await setEditStatus(personId, offerId, editing)
+  } catch(e) { console.log(e) }
   console.log('hello')
 }
 
