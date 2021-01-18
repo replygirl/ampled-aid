@@ -129,6 +129,8 @@ const editOffer = async (
           selectParent = '',
           selectRoutes = {}
         } = Object.values(actions).find(x => x.name === field) as Action
+        console.log('will assign')
+        console.log(type)
         Object.assign(offer, await updateOffer(id, {
           [field]: ['string', 'text'].includes(type)
             ? body
@@ -139,6 +141,8 @@ const editOffer = async (
                 : body
         }))
       }
+
+      console.log('assigned')
 
       const nextActionKey: string | null =
         (!field && (Object.keys(actions).includes(body)))
