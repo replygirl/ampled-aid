@@ -2,12 +2,13 @@ import { camelCase } from '@replygirl/change-case-object'
 import tc from '@replygirl/tc'
 import type { NowResponse } from '@vercel/node'
 
-import type { Offer, Person } from '../../airtable/_types'
+import type { Person } from '../../airtable/_types'
 import { updatePerson } from '../../airtable/_utils'
 import type { TwilioSmsMessage, TwilioSmsIncomingRequest } from './_types'
 import {
   createOffer,
   createPerson,
+  createResponse,
   editOffer,
   findPerson
 } from './_utils'
@@ -48,6 +49,8 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
       console.info(
         `person ${personId} is editing ${editingField} of ${editingId}`
       )
+
+      if (/^RESPOND \d+ .+$/.test(msg.body)) await createResponse(msg)
 
       switch (msg.body) {
         case 'OFFER':

@@ -1,5 +1,6 @@
 export { default as createOffer } from './create-offer'
 export { default as createPerson } from './create-person'
+export { default as createResponse } from './create-response'
 export { default as editOffer } from './edit-offer'
 export { default as findPerson } from './find-person'
 export { default as pong } from './pong'

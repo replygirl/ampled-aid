@@ -1,9 +1,8 @@
 import { Dictionary } from 'dictionary-types'
 
 import type { Offer } from '../../../airtable/_types'
-import { updateOffer, updatePerson } from '../../../airtable/_utils'
+import { findOffer, updateOffer, updatePerson } from '../../../airtable/_utils'
 import type { TwilioSmsMessage } from '../_types'
-import findOffer from './find-offer'
 import createMessageReply from './create-message-reply'
 
 interface ActionBase {

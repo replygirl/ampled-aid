@@ -1,5 +1,7 @@
 export { default as base } from './base'
 export { default as createRecord } from './create-record'
+export { default as findOffer } from './find-person'
+export { default as findPerson } from './find-offer'
 export { default as findRecord } from './find-record'
 export { default as getTable } from './get-table'
 export { default as parseRecord } from './parse-record'
