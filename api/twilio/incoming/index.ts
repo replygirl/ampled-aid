@@ -30,10 +30,17 @@ export default async (req: TwilioSmsIncomingRequest, res: NowResponse) => (
           await editOffer(msg, offerId)
           break
         default:
-          if (editingId) await editOffer(msg, editingId, editingField)
+          if (editingId) {
+            const {
+              editing,
+              offer
+            } = await editOffer(msg, editingId, editingField)
+            await updatePerson(id as string, {
+              editing: editing && offer?.id ? [offer.id] : [],
+              editingField: editing
+            })
+          }
       }
-
-      if (editingId) await editOffer(msg, editingId, editingField)
 
       return res.status(200)
     },
