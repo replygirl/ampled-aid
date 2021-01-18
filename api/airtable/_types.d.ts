@@ -1,7 +1,7 @@
 import type { FieldSet, Record } from '@replygirl/airtable'
 
 export interface Resource extends Dictionary<any> {
-  id: string
+  id?: string
 }
 
 export interface Offer extends Resource {
