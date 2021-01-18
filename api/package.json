@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@replygirl/airtable": "^0.10.2",
-    "@replygirl/change-case-object": "^1.2.6",
+    "@replygirl/change-case-object": "^1.2.7",
     "@replygirl/tc": "^3.0.0",
     "twilio": "^3.54.2"
   }
