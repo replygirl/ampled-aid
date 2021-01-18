@@ -53,7 +53,7 @@ const actions: Dictionary<Action> = {
     }
   },
   s: {
-    name: 'Subcategory',
+    name: 'subcategory',
     type: 'selectChild',
     selectParent: 'category',
     selectRoutes: {
