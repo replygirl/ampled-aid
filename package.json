@@ -8,19 +8,27 @@
     "build": "cross-env NODE_ENV=production vite build"
   },
   "dependencies": {
+    "@replygirl/vanity": "^1.0.0-alpha.5",
     "@vueuse/core": "^4.0.10",
+    "change-case": "^4.1.2",
+    "hash-sum": "^2.0.0",
+    "maska": "^1.3.2",
+    "nullable-ts": "^1.3.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.4.3",
     "@iconify/json": "^1.1.292",
+    "@types/hash-sum": "^1.0.0",
     "@types/node": "^14.14.22",
+    "@types/resize-observer-browser": "^0.1.5",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@vitejs/plugin-vue": "^1.1.2",
     "@vue/compiler-sfc": "^3.0.5",
     "cross-env": "^7.0.2",
     "eslint": "^7.18.0",
+    "postcss-nesting": "^7.0.1",
     "prettier": "^2.1.2",
     "pug": "^3.0.0",
     "stylus": "^0.54.8",

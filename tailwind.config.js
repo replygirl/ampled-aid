@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  separator: '--',
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     content: [
@@ -138,7 +139,7 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
-      sans: [...defaultTheme.fontFamily.sans],
+      sans: ['Replica', ...defaultTheme.fontFamily.sans],
       serif: ['ui-serif', 'serif'],
       mono: ['Courier', '"Courier New"', 'monospace',],
     },
