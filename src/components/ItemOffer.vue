@@ -9,7 +9,7 @@
     p {{ offer.description }}
   .absolute.bottom-0.inset-x-0.items-baseline.justify-between.space-x-4.hidden.sm--flex
     .chip.relative.flex.items-baseline.space-x-2
-      span.absolute.left-2.-top-4.text-k from
+      span.absolute.left-2.-top-4.text-k.opacity-25 from
       span.f-h6(v-if="owner.handle") {{ owner.handle }}
       i(v-if="owner.rollHandle") ${{ owner.rollHandle }}
     a.chip.items-center(

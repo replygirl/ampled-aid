@@ -57,6 +57,8 @@ select {
   background-position: right 4px center;
 }
 
+*:disabled { @apply opacity-25 cursor-not-allowed }
+
 .screen-reader {
   @apply absolute border-none overflow-hidden w-px h-px -m-px p-0 whitespace-nowrap;
 
