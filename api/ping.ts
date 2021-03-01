@@ -1,3 +1,4 @@
-import type { NowRequest, NowResponse } from '@vercel/node'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
-export default (_: NowRequest, res: NowResponse) => res.send('pong')
+export default (_: VercelRequest, res: VercelResponse) =>
+  res.status(200).send('pong')

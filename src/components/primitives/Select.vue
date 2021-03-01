@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
-import type { Nullable } from 'nullable-ts'
 import { defineEmit, defineProps } from 'vue'
 
 import { useId, useModelKey } from '/@/utils'
@@ -29,14 +28,14 @@ import { useId, useModelKey } from '/@/utils'
 const props = defineProps<{
   caption?: string
   disabled?: boolean
-  error?: Nullable<string>
+  error?: string | null
   label?: string
-  modelValue?: Nullable<any>
+  modelValue?: any
   name: string
   options: any[]
   placeholder?: string
   required?: boolean
-  value?: Nullable<any>
+  value?: any
 }>()
 
 const id = useId()

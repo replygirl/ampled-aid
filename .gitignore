@@ -548,5 +548,6 @@ fabric.properties
 .vercel
 
 # Environment variables
+.env
 *.local
 dist/

@@ -4,7 +4,7 @@ main.layout-stack
     :preamble="ready ? 'Editing:' : 'Loading:'"
     :title="ready ? offer.title : `Offer #${code}`"
   )
-  OfferForm(v-model="offer" @submit="onSubmit")
+  FormOffer(v-model="offer" @submit="onSubmit")
 </template>
 
 <script setup lang="ts">

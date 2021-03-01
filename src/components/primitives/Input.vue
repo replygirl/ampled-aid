@@ -15,7 +15,6 @@
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
-import type { Nullable } from 'nullable-ts'
 import { defineProps, defineEmit } from 'vue'
 
 import { useId, useModelKey } from '/@/utils'
@@ -23,13 +22,13 @@ import { useId, useModelKey } from '/@/utils'
 const props = defineProps<{
   caption?: string
   disabled?: boolean
-  error?: Nullable<string>
+  error?: string | null
   label?: string
-  modelValue?: Nullable<number | string | FileList>
+  modelValue?: number | string | FileList | null
   name: string
   required?: boolean
   type: 'file' | 'number' | 'tel' | 'text' | 'url'
-  value?: Nullable<number | string | FileList>
+  value?: number | string | FileList | null
 
   // file
   accept?: string

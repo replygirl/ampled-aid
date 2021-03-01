@@ -27,6 +27,12 @@ html {
   & > * { @apply w-full max-w-88 }
 }
 
+.chip {
+  @apply flex space-x-1 px-1 bg-k text-w f-caption;
+  &.inactive { @apply border; }
+  &.active { @apply bg-w text-k border; }
+}
+
 .chunk { @apply px-2 py-1 border bg-w }
 
 .button, button { @apply chunk text-center }

@@ -4,7 +4,7 @@ main.layout-stack
     title="New offer"
     subtitle="Thanks in advance"
   )
-  OfferForm(v-model="offer" @submit="onSubmit")
+  FormOffer(v-model="offer" @submit="onSubmit")
 </template>
 
 <script setup lang="ts">

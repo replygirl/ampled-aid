@@ -7,13 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import type { Nullable } from 'nullable-ts'
 import { defineProps } from 'vue'
 
 const props = defineProps<{
   caption?: string
   disabled?: boolean
-  error?: Nullable<string>
+  error?: string | null
   legend?: string
   required?: boolean
 }>()

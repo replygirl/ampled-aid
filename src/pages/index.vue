@@ -2,9 +2,9 @@
 main.layout-stack
   Hero(title="Sharing is caring")
   nav.grid.grid-cols-2.gap-2
-    button.col-span-2 Browse offers
-    router-link.button(to="/offers/new") Post an offer
-    button Edit an offer
+    router-link.button.col-span-2(to="/offers") Browse offers
+    router-link.button(disabled to="/offers/new") Post an offer
+    router-link.button(disabled) Edit an offer
 </template>
 
 <style lang="postcss">

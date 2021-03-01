@@ -6,9 +6,6 @@ import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
 import Pages from 'vite-plugin-pages'
 
 const config: UserConfig = {
-  alias: {
-    '/@/': `${path.resolve(__dirname, 'src')}/`
-  },
   plugins: [
     Vue(),
     Pages(),
@@ -16,10 +13,25 @@ const config: UserConfig = {
       customComponentResolvers: ViteIconsResolver({
         componentPrefix: '',
         enabledCollections: ['mdi']
-      }),
+      })
     }),
     Icons()
-  ]
+  ],
+  resolve: {
+    alias: {
+      '/@/': `${path.resolve(__dirname, 'src')}/`
+    }
+  },
+  server: {
+    proxy: {
+      '/api': 'http://ampled-aid-themoon.vercel.app'
+    }
+  },
+  build: {
+    rollupOptions: {
+      external: ['vue-demi']
+    }
+  }
 }
 
 export default config

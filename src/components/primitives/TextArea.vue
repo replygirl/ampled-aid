@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
-import type { Nullable } from 'nullable-ts'
 import {
   onBeforeUnmount,
   ref,
@@ -31,14 +30,14 @@ import { useId, useModelKey } from '/@/utils'
 const props = defineProps<{
   caption?: string
   disabled?: boolean
-  error?: Nullable<string>
+  error?: string | null
   label?: string
   maxLength?: number
-  modelValue?: Nullable<string>
+  modelValue?: string | null
   name: string
   placeholder?: string
   required?: boolean
-  value?: Nullable<string>
+  value?: string | null
 }>()
 
 const id = useId()
@@ -46,7 +45,7 @@ const id = useId()
 const emit = defineEmit()
 const value = useVModel(props, useModelKey(props, 'value'), emit)
 
-const textArea = ref<Nullable<HTMLTextAreaElement>>(null)
+const textArea = ref<HTMLTextAreaElement | null>(null)
 
 const textAreaHeight = ref<number>(0)
 

@@ -3,6 +3,7 @@ header.text-center.sm--p-8
   p(v-if="props.preamble") {{ props.preamble }}
   h2.f-h1 {{ props.title }}
   p(v-if="props.subtitle") {{ props.subtitle }}
+  slot
 </template>
 
 <script setup lang="ts">

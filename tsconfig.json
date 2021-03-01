@@ -12,7 +12,8 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "/@/*": ["src/*"]
+      "/@/*": ["src/*"],
+      "/?": ["types"]
     }
   },
   "exclude": ["dist", "node_modules"]
